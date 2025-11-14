@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le trésor de Colomiers - Étape 10</title>
+    <style>
+        /* --- DESIGN GÉNÉRAL (IDENTIQUE) --- */
+        body {
+            font-family: 'Verdana', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            padding-bottom: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #d35400;
+            font-size: 24px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #2980b9;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-left: 5px solid #2980b9;
+            padding-left: 10px;
+        }
+
+        /* --- STYLE DES DIALOGUES --- */
+        .dialogue-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+
+        .bubble {
+            background-color: #e9eff5;
+            padding: 12px 15px;
+            border-radius: 0 15px 15px 15px;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        
+        .bubble::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -10px;
+            width: 0;
+            height: 0;
+            border-top: 10px solid #e9eff5;
+            border-left: 10px solid transparent;
+        }
+
+        .name-tag {
+            font-size: 11px;
+            font-weight: bold;
+            color: #666;
+            margin-bottom: 4px;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        /* Petite classe pour les descriptions narratives (actions, sons) */
+        .narrative-note {
+            text-align: center;
+            font-style: italic;
+            color: #888;
+            font-size: 13px;
+            margin: 15px 0;
+        }
+
+        /* --- COORDONNÉES GPS --- */
+        .gps-box {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff3cd;
+            border-radius: 8px;
+            border: 1px solid #ffeeba;
+        }
+        .gps-link {
+            display: inline-block;
+            margin-top: 5px;
+            color: #856404;
+            font-weight: bold;
+            text-decoration: none;
+            border-bottom: 2px dotted #856404;
+        }
+        .gps-link:hover {
+            background-color: #856404;
+            color: white;
+        }
+
+        /* --- ENCART "MISSION" (ORANGE) --- */
+        .mission-box {
+            border: 3px dashed #d35400;
+            background-color: #fffdf0;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 10px;
+            color: #d35400;
+        }
+
+        /* --- ENCART "DIRECTION" (GRIS/NEUTRE) --- */
+        .direction-box {
+            background-color: #f8f9fa;
+            border-left: 6px solid #95a5a6;
+            padding: 15px 20px;
+            margin-top: 40px;
+            color: #555;
+            font-style: italic;
+            font-size: 15px;
+        }
+        
+        /* --- Styles spécifiques pour les avatars superposés avec chevauchement léger --- */
+        .stacked-avatars-visible {
+            position: relative;
+            width: 80px; /* Largeur pour que les deux soient visibles avec un léger chevauchement */
+            height: 50px; /* Hauteur de l'avatar */
+            flex-shrink: 0;
+            margin-right: 15px;
+        }
+
+        .stacked-avatars-visible .avatar-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2; /* Pour que Serge (à gauche) soit au-dessus si chevauchement */
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+        }
+
+        .stacked-avatars-visible .avatar-right {
+            position: absolute;
+            top: 0;
+            left: 30px; /* Chevauchement de 20px (50-30=20) */
+            z-index: 1;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Le trésor de Colomiers</h1>
+
+    <h2>10. Le pavillon blanc</h2>
+
+    <div class="gps-box">
+        📍 Cliquez pour y aller :<br>
+        <a href="https://www.google.com/maps/search/?api=1&query=43.613556,1.3371110" target="_blank" class="gps-link">
+            43.609498, 1.334816
+        </a>
+    </div>
+
+
+    <div class="dialogue-row">
+        <img src="Loumpour.jpg" alt="Loumpour" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Loumpour</span>
+            C’est quoi ce bâtiment étrange devant lequel on vient de passer ?
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <img src="Bernard.jpg" alt="Bernard" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Bernard</span>
+            Le pavillon blanc. D’après le site de la Mairie, il a été conçu par Rudy Riccioti en 2011. Il permet de réunir un espace médiathèque (plus de 110.000 ouvrages) et un espace dédié à l’art contemporain. Je me souviens que Colomiers a toujours été une ville motrice en termes d’art contemporain. Il y avait une galerie à quelques pas d’ici qui s’appelait « l’espace des arts » où étaient présentées des expositions temporaires. Elle est aujourd’hui occupée par une compagnie de théâtre qui fait aussi de la création contemporaine.
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <img src="Serge.jpg" alt="Serge" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Serge</span>
+            Et ça date pas d'hier. En 1982, Pierre Debeaux, connu pour être l’architecte de la caserne Vion à Toulouse, avait été choisi pour construire sur le rond-point de Flandres-Dunkerke une structure métallique gigantesque en trois dimensions. Un peu à la façon d’un mobile de Calder, elle bougeait au gré du vent. Elle s’est malheureusement écroulée 5 ans après son installation tuant deux personnes, qui étaient venues pour tenter de la réparer car elle ne bougeait plus.
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <img src="Loumpour.jpg" alt="Loumpour" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Loumpour</span>
+            Gloups… Euh, vous avez rien de plus joyeux ?
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <img src="Bernard.jpg" alt="Bernard" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Bernard</span>
+            Ah, ben si ! Colomiers est également labélisée “ville amie des enfants” par l’UNICEF depuis 2009 et renouvelé au moins jusqu’en 2026. Elle s’engage au bien-être, à la non-discrimination et à la participation des enfants dans la vie culturelle, politique et sportive.
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <img src="Loumpour.jpg" alt="Loumpour" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Loumpour</span>
+            Eh, mais voilà ! On l’a notre trésor : les enfants ! C’est vieux comme le monde, et ils sont tellement mignons…
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <img src="Serge.jpg" alt="Serge" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Serge</span>
+            Ben si c’est ça ton trésor, moi j’en veux pas ! Beurk ! Ca bave, ça crie ! Non merci !
+        </div>
+    </div>
+
+
+    <div class="mission-box">
+        Sur la mosaïque à vos pieds, combien d’enfants sont représentés en tout ? (attention, la colombe ne compte pas, c’est juste l’emblème de la ville)
+        <br><br>
+        Notez ce chiffre qui vaut J : J =_____
+    </div>
+
+
+    <div class="dialogue-row">
+        <img src="Bernard.jpg" alt="Bernard" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Bernard</span>
+            Euh, puisqu’on parlait art contemporain, c’est pas le centre Pompidou là à gauche ?
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <img src="Serge.jpg" alt="Serge" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Serge</span>
+            Beaubourg ? Non, c’est à Paris. Mais effectivement c’est quoi ce gros tube vert qui sort du toit ?
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <img src="Loumpour.jpg" alt="Loumpour" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Loumpour</span>
+            Il y a écrit « espace nautique », ça doit être un toboggan aquatique…
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <div class="stacked-avatars-visible">
+            <img src="Serge.jpg" alt="Serge" class="avatar-left">
+            <img src="Bernard.jpg" alt="Bernard" class="avatar-right">
+        </div>
+        <div class="bubble">
+            <span class="name-tag">Serge et Bernard</span>
+            Un toboggan ! Géniaaaallll !! On y vaaaa….
+        </div>
+    </div>
+    
+   
+    <div class="dialogue-row">
+        <img src="Loumpour.jpg" alt="Loumpour" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Loumpour</span>
+            Mais attendez moi…
+        </div>
+    </div>
+
+    <div class="dialogue-row">
+        <img src="Loumpour.jpg" alt="Loumpour" class="avatar">
+        <div class="bubble">
+            <span class="name-tag">Loumpour</span>
+            (à elle-même) Rhooo ils sont pénibles !
+        </div>
+    </div>
+
+
+    <div class="direction-box">
+        Prenez le premier chemin à gauche, traversez la mare aux canards, passez devant l’espace nautique et poursuivez jusqu’au fond de la place des fêtes pour mieux voir le toboggan.
+    </div>
+
+</div>
+
+</body>
+</html>
